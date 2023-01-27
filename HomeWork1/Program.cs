@@ -80,7 +80,23 @@ while (isWork)
           if (a > 0)
           {
             Console.Write("Все чётные числа от 1 до N включительно: ");
-            for (long i = 1; i <= a; i++)
+            //Первое решение
+            // for (long i = 1; i <= a; i++)
+            // {
+            //   if (i == 2)
+            //   {
+            //     Console.Write($"{i}");
+            //     count++;
+            //   }
+            //   else if (i % 2 == 0)
+            //   {
+            //     Console.Write($", {i}");
+            //     count++;
+            //   }
+            // }
+
+            //Второе решение
+            for (long i = 2; i <= a; i += 2)
             {
               if (i == 2)
               {
@@ -92,8 +108,8 @@ while (isWork)
                 Console.Write($", {i}");
                 count++;
               }
+
             }
-            
             Console.WriteLine($"\nВсего чётных чисел: {count}");
             Console.WriteLine("\nНажмите любую кнопку для возврата в главное меню");
             Console.ReadKey();
@@ -104,12 +120,17 @@ while (isWork)
             Console.ReadKey();
           }
           break;
+
+
+
         }
 
-        //default:
-        //break;
     }
+
+    //default:
+    //break;
   }
+
   else if (word.ToLower() == "/help")
   {
     Console.Clear();
