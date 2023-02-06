@@ -1,5 +1,3 @@
-﻿using System.ComponentModel;
-
 bool isWork = true;
 while (isWork)
 {
