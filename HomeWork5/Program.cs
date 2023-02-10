@@ -1,6 +1,6 @@
-﻿bool isWork = true;
+bool isWork = true;
 Console.Clear();
-string mainMenu = $"Если хотите вызвать справку, напишите - /help.{Environment.NewLine}Если хотите завершить работу программы, напишите - exit.{Environment.NewLine}{Environment.NewLine}Какую задачу хотите проверить?{Environment.NewLine}Напишите номер задачи от 1 до 3: ";
+string mainMenu = $"Если хотите вызвать справку, напишите - /help.{Environment.NewLine}Если хотите завершить работу программы, напишите - exit.{Environment.NewLine}Если хотите очистить терминал, напишите clear.{Environment.NewLine}{Environment.NewLine}Какую задачу хотите проверить?{Environment.NewLine}Напишите номер задачи от 1 до 3: ";
 
 while (isWork)
 {
@@ -10,6 +10,7 @@ while (isWork)
   Console.WriteLine();
 
   if (word == "1" || word == "2" || word == "3")
+  {
     switch (word)
     {
       case "1":
@@ -25,14 +26,37 @@ while (isWork)
           WantToEndTask();
           break;
         }
+      case "3":
+        {
+          Task3_DifferenceBetweenMinAndMax();
+          WantToEndTask();
+          break;
+        }
     }
+  }
+  else if (word.ToLower() == "e" || word.ToLower() == "exit")
+  {
+      WantToExit();
+  }
+  else if (word.ToLower() == "c" || word.ToLower() == "clear")
+  {
+      WantToClear();
+  }
+  else if (word.ToLower() == "/help" || word.ToLower() == "h")
+  {
+      
+  }
+  else
+  {
+    
+  }
+  
 }
 
 #region Methods_for_work
 
 void WantToClear()
 {
-  Console.ReadKey();
   Console.Clear();
 }
 
@@ -50,6 +74,19 @@ void WantToEndTask()
 #endregion
 
 #region Methods_for_tasks
+
+int ReadInt(string arg)
+{
+  int number;
+  Console.Write($"Введите {arg}: ");
+
+  while (!int.TryParse(Console.ReadLine(), out number))
+  {
+    Console.Write("Значение не является целым числом, повторите: ");
+  }
+
+  return number;
+}
 
 int[] GetRandomArray(int length, int minValue, int maxValue)
 {
@@ -77,22 +114,49 @@ int CalculateCountOfEven(int[] array)
   return count;
 }
 
+int CalculateSumOfNotEvenIndexes(int[] array)
+{
+  int sum = 0;
+
+  for (int i = 1; i < array.Length; i += 2)
+  {
+    sum += array[i];
+  }
+
+  return sum;
+}
+
+int[] FindMinAndMax(int[] array)
+{
+  int[] minAndMax = new int[2];
+  minAndMax[0] = array[0];
+  minAndMax[1] = array[1];
+
+  for (int i = 0; i < array.Length; i++)
+  {
+    if (array[i] >= minAndMax[1])
+      minAndMax[1] = array[i];
+    else if (array[i] <= minAndMax[0])
+      minAndMax[0] = array[i];
+  }
+
+  return minAndMax;
+}
+
+int CalculateDifference(int firstNumber, int secondNumber)
+{
+  int difference = 0;
+  if (firstNumber > secondNumber)
+    difference = firstNumber - secondNumber;
+  else
+    difference = secondNumber - firstNumber;
+
+  return difference;
+}
+
 #endregion
 
 #region Tasks
-
-int ReadInt(string arg)
-{
-  int number;
-  Console.Write($"Введите {arg}: ");
-
-  while (!int.TryParse(Console.ReadLine(), out number))
-  {
-    Console.Write("Значение не является целым числом, повторите: ");
-  }
-
-  return number;
-}
 
 void Task1_CountOfEven()
 {
@@ -105,9 +169,22 @@ void Task1_CountOfEven()
     Console.WriteLine($"В вашем массиве {string.Join(", ", array)} необнаружились чётные числа.");
 }
 
-void Task2_SumOfNotEvenIndexes(int[] array)
+void Task2_SumOfNotEvenIndexes()
 {
   int[] array = GetRandomArray(ReadInt("длину массива"), ReadInt("минимальное значение наполнения"), ReadInt("максимальное значение наполнения"));
-  int sum = 
+  int sum = CalculateSumOfNotEvenIndexes(array);
+
+  if (sum != 0)
+    Console.WriteLine($"Сумма всех элементов стоящих на нечётных индексах вашего массива {string.Join(", ", array)} равна {sum}.");
 }
+
+void Task3_DifferenceBetweenMinAndMax()
+{
+  int[] array = GetRandomArray(ReadInt("длину массива"), ReadInt("минимальное значение наполнения"), ReadInt("максимальное значение наполнения"));
+  int[] minAndMax = FindMinAndMax(array);
+  int difference = CalculateDifference(minAndMax[0], minAndMax[1]);
+
+  Console.WriteLine($"Разница между минимальным и максимальным значение вашего массива {string.Join(", ", array)} равна {difference}");
+}
+
 #endregion
