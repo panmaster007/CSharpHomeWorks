@@ -1,8 +1,9 @@
-﻿Tasks t = new Tasks();
+﻿Console.Clear();
+
+Tasks t = new Tasks();
 Methods m = new Methods();
 
 bool isWork = true;
-Console.Clear();
 string mainMenuText = $"Если хотите вызвать справку, напишите - /help.{Environment.NewLine}"
                     + $"Если хотите завершить работу программы, напишите - exit.{Environment.NewLine}"
                     + $"Если хотите очистить терминал, напишите clear.{Environment.NewLine}{Environment.NewLine}"
@@ -11,8 +12,7 @@ string mainMenuText = $"Если хотите вызвать справку, н�
 while (isWork)
 {
   Console.Write(mainMenuText);
-
-  var word = Console.ReadLine();
+  string word = Console.ReadLine();
   Console.WriteLine();
 
   if (word == "1" || word == "2")
@@ -42,7 +42,7 @@ while (isWork)
   {
     Console.Clear();
   }
-  else if (word.ToLower() == "/help" || word.ToLower() == "h")
+  else if (word.ToLower() == "/help" || word.ToLower() == "h" || word.ToLower() == "р")
   {
     m.ToHelp();
   }

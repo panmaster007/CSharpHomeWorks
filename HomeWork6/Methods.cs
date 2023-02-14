@@ -1,5 +1,4 @@
-﻿
-public class Methods
+﻿public class Methods
 {
 	#region MethodsForTasks
 
@@ -68,7 +67,7 @@ public class Methods
 
 	public double FindXOfCross(double k1, double b1, double k2, double b2)
 	{
-		return (b1 - b2) / (-k1 + k2);
+		return (b1 - b2) / (- k1 + k2);
 	}
 
 	public double FindYOfCross(double k, double b, double x)
@@ -88,11 +87,11 @@ public class Methods
 
 	public void ToHelp()
 	{
+		Console.Clear();
   	string text = $"Справка:{Environment.NewLine}1. Посчитать, сколько введено чисел больше 0.{Environment.NewLine}"
 								+ $"2. Нахождение точки пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2.{Environment.NewLine}"
 								+ $"/help или /h. Справка{Environment.NewLine}Exit или E. Завершение работы программы";
 
-  	Console.Clear();
   	Console.WriteLine(text);
   	ToEndTask();
 		Console.Clear();
