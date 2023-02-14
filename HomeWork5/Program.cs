@@ -1,3 +1,4 @@
+
 bool isWork = true;
 Console.Clear();
 string mainMenuText = $"Если хотите вызвать справку, напишите - /help.{Environment.NewLine}Если хотите завершить работу программы, напишите - exit.{Environment.NewLine}Если хотите очистить терминал, напишите clear.{Environment.NewLine}{Environment.NewLine}Какую задачу хотите проверить?{Environment.NewLine}Напишите номер задачи от 1 до 3: ";
