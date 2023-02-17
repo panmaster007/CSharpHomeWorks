@@ -120,9 +120,9 @@
       firstIndex = ReadInt("первый индекс");
       secondIndex = ReadInt("второй индекс");
 
-      if (firstIndex < array.GetLength(0) && secondIndex < array.GetLength(1))
+      if (firstIndex <= array.GetLength(0) && secondIndex <= array.GetLength(1))
       {
-        Console.WriteLine($"Элемент позиции [{firstIndex}, {secondIndex}] - {array[firstIndex, secondIndex]}");
+        Console.WriteLine($"Элемент позиции [{firstIndex}, {secondIndex}] - {array[firstIndex  - 1, secondIndex - 1]}");
       }
       else
       {
