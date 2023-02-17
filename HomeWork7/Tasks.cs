@@ -2,24 +2,31 @@
 {
   Methods m = new Methods();
 
-  public void Task41_CountOfNumsMoreThanZero_1() // запрос пока пользователь не прервёт ввод
+  public void Task47_MakeTwoDimensionArrayOfDoubles()
   {
-    string text = $"Вы выбрали задачу номер 1{Environment.NewLine}Посчитайте, сколько введено чисел больше 0{Environment.NewLine}"
-                + $"Введите необходимое количество чисел по очереди, а в конце введите \"stop\"{Environment.NewLine}";
+    string text = $"Вы выбрали задачу номер 1{Environment.NewLine}Задайте двумерный массив, заполненный случайными вещественными числами.{Environment.NewLine}";
     Console.WriteLine(text);
 
-    //double result = m.CalculateNumsMoreThanZero();
-    //Console.WriteLine($"Вы ввели {result} чисел больше 0.");
+    double[,] array = m.GetTwoDimensionArrayOfDouble(m.ReadInt("первую длину"), m.ReadInt("вторую длину"));
+    m.PrintTwoDimensionArrayOfDoubles(array);
+    Console.WriteLine();
+    m.FillTwoDimensionArrayOfDoubles(array);
+    m.PrintTwoDimensionArrayOfDoubles(array);
   }
 
-  public void Task41_CountOfNumsMoreThanZero_2() // через массив
+  public void Task50_ShowArgOnIndexes()
   {
-    string text = $"Вы выбрали задачу номер 2{Environment.NewLine}Посчитать, сколько введено чисел больше 0.{Environment.NewLine}";
+    string text = $"Вы выбрали задачу номер 2{Environment.NewLine}Вывод элемента на выбранной позиции.{Environment.NewLine}";
     Console.WriteLine(text);
 
-    //double result = m.CalculateNumsMoreThanZeroInArray(m.GetFilledArray(m.ReadFromUser("количество чисел для сравнения")));
-    //Console.WriteLine($"Вы ввели {result} чисел больше 0.");
-  }
+    int[,] array = m.GetTwoDimensionArrayOfInts(m.ReadInt("первую длину"), m.ReadInt("вторую длину"));
+    m.PrintTwoDimensionArrayOfInts(array);
+    Console.WriteLine();
+    int[,] newArray = m.FillTwoDimensionArrayOfInts(array, m.ReadInt("минимальное значение наполнения"), m.ReadInt("максимальное значение наполнения"));
+    m.PrintTwoDimensionArrayOfInts(newArray);
+    Console.WriteLine();
+    m.FindElementInArray(newArray);
+  } 
 
   public void Task52_AverageOfColumn()
   {
@@ -27,8 +34,12 @@
                 + $"Нахождение среднего арифметического каждого столбца двумерного массива.{Environment.NewLine}";
     Console.WriteLine(text);
 
-    int[,] array = m.GetTwoDimensionArray(m.ReadFromUser("первую длину", 1), m.ReadFromUser("вторую длину", 1));
-    int[,] newArray = m.FillTwoDimensionArray(array, m.ReadFromUser("минимальное значение наполнения", 1), m.ReadFromUser("максимальное значение наполнения", 1));
+    int[,] array = m.GetTwoDimensionArrayOfInts(m.ReadInt("первую длину"), m.ReadInt("вторую длину"));
+    m.PrintTwoDimensionArrayOfInts(array);
+    Console.WriteLine();
+    int[,] newArray = m.FillTwoDimensionArrayOfInts(array, m.ReadInt("минимальное значение наполнения"), m.ReadInt("максимальное значение наполнения"));
+    m.PrintTwoDimensionArrayOfInts(newArray);
+    Console.WriteLine();
     m.CalculateAverageOfColumn(newArray);
   }
 }

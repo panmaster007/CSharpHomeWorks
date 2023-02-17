@@ -21,13 +21,13 @@ while (isWork)
     {
       case "1":
       {
-        //t.;
+        t.Task47_MakeTwoDimensionArrayOfDoubles();
         m.ToEndTask();
         break;
       }
       case "2":
       {
-        //t.;
+        t.Task50_ShowArgOnIndexes();
         m.ToEndTask();
         break;
       }

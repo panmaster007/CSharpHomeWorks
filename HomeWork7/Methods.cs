@@ -2,7 +2,7 @@
 {
   #region MethodsForTasks
 
-  public double ReadFromUser(string arg)
+  public double ReadDouble(string arg)
   {
     Console.Write($"Введите {arg}: ");
     double num;
@@ -15,7 +15,7 @@
     return num;
   }
 
-  public int ReadFromUser(string arg, int iUseless)
+  public int ReadInt(string arg)
   {
     Console.Write($"Введите {arg}: ");
     int num;
@@ -28,7 +28,7 @@
     return num;
   }
 
-  public void PrintTwoDimensionArray(int[,] array)
+  public void PrintTwoDimensionArrayOfInts(int[,] array)
   {
     for (int i = 0; i < array.GetLength(0); i++)
     {
@@ -41,49 +41,58 @@
     }
   }
 
-	public void PrintTwoDimensionArray(double[,] array, int kUseless)
-	{
-		for (int i = 0; i < array.GetLength(0); i++)
-		{
-			for (int j = 0; j < array.GetLength(1); j++)
-			{
-				Console.Write($"{array[i, j]} ");
-			}
+  public void PrintTwoDimensionArrayOfDoubles(double[,] array)
+  {
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+      for (int j = 0; j < array.GetLength(1); j++)
+      {
+        Console.Write($"{array[i, j]} ");
+      }
 
-			Console.WriteLine();
-		}
-	}
+      Console.WriteLine();
+    }
+  }
 
-  public int[,] GetTwoDimensionArray(int firstLength, int secondLength)
+  public int[,] GetTwoDimensionArrayOfInts(int firstLength, int secondLength)
   {
     int[,] array = new int[firstLength, secondLength];
 
     Console.WriteLine($"Ваш массив {firstLength}*{secondLength} готов:");
-    PrintTwoDimensionArray(array);
-		Console.WriteLine();
     return array;
   }
 
-  public double[,] FillTwoDimensionArray(int[,] array)
+  public double[,] GetTwoDimensionArrayOfDouble(int firstLength, int secondLength)
+  {
+    double[,] array = new double[firstLength, secondLength];
+
+    Console.WriteLine($"Ваш массив {firstLength}*{secondLength} готов:");
+    return array;
+  }
+
+  public void FillTwoDimensionArrayOfDoubles(double[,] array)
   {
     Random random = new Random();
-    double[,] newArray = new double[array.GetLength(0), array.GetLength(1)];
 
     for (int i = 0; i < array.GetLength(0); i++)
     {
       for (int j = 0; j < array.GetLength(1); j++)
       {
-        newArray[i, j] = random.NextDouble();
+        if (random.Next(-1, 1) < 0)
+        {
+          array[i, j] = -Math.Round(random.NextDouble() * 10, 1);
+        }
+        else
+        {
+          array[i, j] = Math.Round(random.NextDouble() * 10, 1);
+        }
       }
     }
 
-    Console.WriteLine($"{Environment.NewLine}Заполнил ваш массив:");
-    PrintTwoDimensionArray(newArray, 1);
-		Console.WriteLine();
-    return newArray;
+    Console.WriteLine($"Заполнил ваш массив:");
   }
 
-  public int[,] FillTwoDimensionArray(int[,] array, int minValue, int maxValue)
+  public int[,] FillTwoDimensionArrayOfInts(int[,] array, int minValue, int maxValue)
   {
     int[,] newArray = new int[array.GetLength(0), array.GetLength(1)];
     Random random = new Random();
@@ -97,9 +106,30 @@
     }
 
     Console.WriteLine($"Заполнил ваш массив:");
-    PrintTwoDimensionArray(newArray);
-		Console.WriteLine();
     return newArray;
+  }
+
+  public void FindElementInArray(int[,] array)
+  {
+    int firstIndex = 0;
+    int secondIndex = 0;
+    bool isTrue = true;
+
+    while (isTrue)
+    {      
+      firstIndex = ReadInt("первый индекс");
+      secondIndex = ReadInt("второй индекс");
+
+      if (firstIndex < array.GetLength(0) && secondIndex < array.GetLength(1))
+      {
+        Console.WriteLine($"Элемент позиции [{firstIndex}, {secondIndex}] - {array[firstIndex, secondIndex]}");
+      }
+      else
+      {
+        Console.Write("Нет такого элемента!");
+        isTrue = false;
+      }
+    }
   }
 
   public void CalculateAverageOfColumn(int[,] array)
@@ -115,7 +145,7 @@
         resultX += array[j, i];
       }
 
-			resultX /= array.GetLength(0);
+      resultX /= array.GetLength(0);
       Console.WriteLine($"Среднее арифметическое {i + 1} столбца: {Math.Round(resultX, 1)}");
     }
   }
